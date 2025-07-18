@@ -1,18 +1,16 @@
+const alphabet = Array.from("abcdefghijklmnopqrstuvwxyz");
 
-
-
-function getRandomArrayIndex(arr) {
-    return Math.floor(Math.random() * arr.length);
+function getShuffledAlphabet() {
+    const shuffled = alphabet.slice().sort(() => Math.random() - 0.5);
+    return shuffled;
 }
-
-function getRandomArrayItem(arr) {
-    return arr[getRandomArrayIndex(arr)];
-}
-
 
 // TODO: Add seed string support
 export function getNewAsmlGrid() {
-    // const lines = [];
     
-    return [['A', 'B', 'C'], ['A', 'B', 'C']];
+    const normalLines = alphabet.map((c) => {
+        return [c, ...getShuffledAlphabet()];
+    });
+    const lastLine = [' ', ...getShuffledAlphabet()];
+    return [...normalLines, lastLine];
 }
